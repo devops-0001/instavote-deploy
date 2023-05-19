@@ -1,0 +1,13 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: instavote
+  namespace: flux-system
+spec:
+  interval: 1h
+  ref:
+    branch: main
+  secretRef:
+    name: github-instavote
+  url: https://github.com/devops-0001/instavote.git
