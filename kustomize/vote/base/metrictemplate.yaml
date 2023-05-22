@@ -2,22 +2,28 @@ apiVersion: flagger.app/v1beta1
 kind: MetricTemplate
 metadata:
   name: error-rate
-  namespace: test
+  namespace: flagger-system
 spec:
   provider:
-    address: http://kube-prometheus-stack-prometheus.monitoring:9090
     type: prometheus
+    address: http://kube-prometheus-stack-prometheus:9090
   query: |
-    100 - rate(
-      http_requests_total{
-        namespace="{{ namespace }}",
-        job="{{ target }}-canary",
-        status!~"5.*"
-      }[{{ interval }}]) 
+    100 - sum(
+      rate(
+        nginx_ingress_controller_requests{
+          exported_namespace="{{ namespace }}",
+          ingress="{{ ingress }}",
+          status!~"5.*"
+        }[{{ interval }}]
+      )
+    ) 
     / 
-    rate(
-      http_requests_total{
-        namespace="{{ namespace }}",
-        job="{{ target }}-canary"
-      }[{{ interval }}]
-    ) * 100
+    sum(
+      rate(
+        nginx_ingress_controller_requests{
+          exported_namespace="{{ namespace }}",
+          ingress="{{ ingress }}"
+        }[{{ interval }}]
+      )
+    ) 
+    * 100
