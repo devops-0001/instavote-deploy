@@ -6,7 +6,6 @@ resources:
 
 patchesStrategicMerge:
 - deployment.yaml
-- service.yaml
 
 namespace: instavote
 
