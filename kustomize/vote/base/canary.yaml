@@ -49,6 +49,7 @@ spec:
     - name: error-rate
       templateRef:
         name: error-rate
+        namespace: ingress-nginx
       thresholdRange:
         max: 1
       interval: 30s
