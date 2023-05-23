@@ -46,13 +46,13 @@ spec:
     #stepWeight: 5
     # ===
     metrics:
-    - name: request-success-rate
-      # minimum req success rate (non 5xx responses)
-      # percentage (0-100)
+    - name: error-rate
+      templateRef:
+        name: error-rate
+        namespace: flagger-system
       thresholdRange:
-        min: 99
-      interval: 1m
-    # testing (optional)
+        max: 1
+      interval: 30s
     webhooks:
       - name: acceptance-test
         type: pre-rollout
@@ -65,4 +65,4 @@ spec:
         url: http://flagger-loadtester.flagger-system/
         timeout: 5s
         metadata:
-          cmd: "hey -z 30s -q 10 -c 2 -host vote.example.com http://10.8.130.199"
+          cmd: "hey -z 30s -q 10 -c 2  -host vote.example.com http://10.8.130.199"
