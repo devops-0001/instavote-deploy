@@ -65,4 +65,4 @@ spec:
         url: http://flagger-loadtester.flagger-system/
         timeout: 5s
         metadata:
-          cmd: "hey -z 30s -q 10 -c 2  -host vote.example.com http://10.8.130.199"
+          cmd: "hey -z 30s -q 10 -c 2  -host vote.example.com http://34.173.138.183"
