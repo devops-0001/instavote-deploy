@@ -63,6 +63,6 @@ spec:
           cmd: "curl http://vote-canary.instavote/ | grep choice"
       - name: load-test
         url: http://flagger-loadtester.flagger-system/
-        timeout: 5s
+        timeout: 30s
         metadata:
           cmd: "hey -z 30s -q 10 -c 2  -host vote.example.com http://34.122.99.219"
